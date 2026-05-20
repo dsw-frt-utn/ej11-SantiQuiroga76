@@ -63,7 +63,38 @@ internal class Ejemplos
     //Eliminar un alumno por clave y listar por consola los alumnos
     public static void EjemploDictionary()
     {
+        CasoDictionary dictAlu = new CasoDictionary();
 
+        Alumno alu1 = new Alumno(258, "Santiago", 7.5);
+        Alumno alu2 = new Alumno(307, "Joaquin", 8.2);
+        Alumno alu3 = new Alumno(322, "Pipe", 6.7);
+
+        dictAlu.AgregarALumno(alu1.Id, alu1);
+        dictAlu.AgregarALumno(alu2.Id, alu2);
+        dictAlu.AgregarALumno(alu3.Id, alu3);
+
+        Console.WriteLine("--- DICCIONARIO INCIAL ALUMNOS ---");
+        foreach(var item in dictAlu.ObtenerDiccionario())
+        {
+            Console.WriteLine(item);
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("--- BUSQUEDA ALUMNO POR CLAVE ---");
+        Console.WriteLine(dictAlu.BuscarAlumno(307));
+        Console.WriteLine();
+
+        Console.WriteLine("--- BUSQUEDA ALUMNO INEXISTENTE POR CLAVE ---");
+        var busqueda = dictAlu.BuscarAlumno(40);
+        Console.WriteLine(busqueda != null? busqueda : "El alumno buscado no existe");
+        Console.WriteLine();
+
+        Console.WriteLine("--- ELIMINACION DE ALUMNO POR CLAVE Y LISTADO ---");
+        dictAlu.EliminarAlumno(322);
+        foreach (var item in dictAlu.ObtenerDiccionario())
+        {
+            Console.WriteLine($"{item.Key} - {item.Value.Nombre} - {item.Value.Promedio}");
+        }
     }
 
     //Realizar una llamada a cada método definido en CasoLinq y mostar por consola según corresponda
