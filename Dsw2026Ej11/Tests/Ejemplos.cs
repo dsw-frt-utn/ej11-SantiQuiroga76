@@ -1,6 +1,7 @@
 ﻿using Dsw2026Ej11.Collections;
 using Dsw2026Ej11.Domain;
 using Microsoft.VisualBasic;
+using System.Globalization;
 
 namespace Dsw2026Ej11.Tests;
 
@@ -98,8 +99,58 @@ internal class Ejemplos
     }
 
     //Realizar una llamada a cada método definido en CasoLinq y mostar por consola según corresponda
+
     public static void EjemploLinq()
     {
+        CultureInfo.CurrentCulture = new CultureInfo("es-AR");
+        CasoLinq linqLibro = new CasoLinq();
+
+        Console.WriteLine("--- PRIMER LIBRO ---");
+        var primero = linqLibro.GetPrimero();
+        Console.WriteLine($"ID: {primero.Id} - Titulo: {primero.Titulo} - Precio: {primero.Precio:C}");
+        Console.WriteLine();
+        Console.WriteLine("--- ULTIMO LIBRO ---");
+        var ultimo = linqLibro.GetUltimo();
+        Console.WriteLine($"ID: {ultimo.Id} - Titulo: {ultimo.Titulo} - Precio: {ultimo.Precio:C}");
+        Console.WriteLine();
+        Console.WriteLine("--- SUMA PRECIOS LIBROS ---");
+        Console.WriteLine(linqLibro.GetTotalPrice().ToString("C"));
+        Console.WriteLine();
+        Console.WriteLine("--- PROMEDIO PRECIOS LIBROS ---");
+        Console.WriteLine(linqLibro.GetPromedioPrecios().ToString("C"));
+        Console.WriteLine();
+        Console.WriteLine("--- LISTA LIBROS POR ID > 15 ---");
+        foreach(var l in linqLibro.GetListById())
+        {
+            Console.WriteLine($"ID: {l.Id} - Titulo: {l.Titulo} - Precio: {l.Precio:C}");
+        }
+        Console.WriteLine();
+        Console.WriteLine("--- LISTA LIBROS POR TITULO Y PRECIO ---");
+        foreach (var l in linqLibro.GetLibros())
+        {
+            Console.WriteLine(l);
+        }
+        Console.WriteLine();
+        Console.WriteLine("--- LIBRO MAYOR PRECIO ---");
+        var mayor = linqLibro.GetMayorPrecio();
+        Console.WriteLine($"ID: {mayor.Id} - Titulo: {mayor.Titulo} - Precio: {mayor.Precio:C}");
+        Console.WriteLine();
+        Console.WriteLine("--- LIBRO MENOR PRECIO ---");
+        var menor = linqLibro.GetMenorPrecio();
+        Console.WriteLine($"ID: {menor.Id} - Titulo: {menor.Titulo} - Precio: {menor.Precio:C}");
+        Console.WriteLine();
+        Console.WriteLine("--- LISTA LIBROS POR PRECIO > PROMEDIO ---");
+        Console.WriteLine($"Promedio: {linqLibro.GetPromedioPrecios():C}");
+        foreach (var l in linqLibro.GetMayorPromedio())
+        {
+            Console.WriteLine($"ID: {l.Id} - Titulo: {l.Titulo} - Precio: {l.Precio:C}");
+        }
+        Console.WriteLine();
+        Console.WriteLine("--- LISTA LIBROS ORDENADOS DESCENDENTEMENTE ---");
+        foreach (var l in linqLibro.GetLibrosOrdenados())
+        {
+            Console.WriteLine(l.Titulo);
+        }
 
     }
 }
